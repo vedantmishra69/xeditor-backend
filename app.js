@@ -4,8 +4,11 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const expressWs = require("express-ws");
 const cors = require("cors");
+const http = require("http");
+const expressApp = express();
+const server = http.createServer(expressApp);
 
-const { app } = expressWs(express());
+const { app } = expressWs(expressApp, server);
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -20,4 +23,4 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-module.exports = app;
+module.exports = server;
