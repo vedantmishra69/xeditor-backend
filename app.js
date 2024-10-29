@@ -7,11 +7,11 @@ const cors = require("cors");
 const http = require("http");
 const expressApp = express();
 const server = http.createServer(expressApp);
+require("dotenv").config();
 
 const { app } = expressWs(expressApp, server);
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index.route");
 
 app.use(cors());
 app.use(logger("dev"));
@@ -21,6 +21,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 module.exports = server;
