@@ -3,7 +3,7 @@ const { makeRequest } = require("../lib/util");
 const JUDGE0_API = process.env.JUDGE0_API;
 const JUDGE0_API_KEY = process.env.JUDGE0_API_KEY;
 const JUDGE0_HOST = process.env.JUDGE0_HOST;
-const BASE64 = false;
+const BASE64 = true;
 
 exports.getLangs = async () => {
   const url = `${JUDGE0_API}/languages`;
