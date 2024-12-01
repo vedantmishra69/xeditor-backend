@@ -2,7 +2,6 @@ const { makeRequest } = require("../lib/util");
 
 const JUDGE0_API = process.env.JUDGE0_API;
 const JUDGE0_API_KEY = process.env.JUDGE0_API_KEY;
-const JUDGE0_HOST = process.env.JUDGE0_HOST;
 const BASE64 = true;
 
 exports.getLangs = async () => {
@@ -10,8 +9,7 @@ exports.getLangs = async () => {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": JUDGE0_API_KEY,
-      "x-rapidapi-host": JUDGE0_HOST,
+      "X-AUTH-TOKEN": JUDGE0_API_KEY,
     },
   };
   return await makeRequest(url, options);
@@ -22,8 +20,7 @@ exports.createSubmission = async (body) => {
   const options = {
     method: "POST",
     headers: {
-      "x-rapidapi-key": JUDGE0_API_KEY,
-      "x-rapidapi-host": JUDGE0_HOST,
+      "X-AUTH-TOKEN": JUDGE0_API_KEY,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
@@ -36,8 +33,7 @@ exports.getSubmission = async (token) => {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": JUDGE0_API_KEY,
-      "x-rapidapi-host": JUDGE0_HOST,
+      "X-AUTH-TOKEN": JUDGE0_API_KEY,
     },
   };
   return await makeRequest(url, options);
