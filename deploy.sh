@@ -1,5 +1,7 @@
 git pull origin main
 
+cp ../.env .env
+
 docker stop xeditor-backend
 docker rm xeditor-backend
 docker image rm xeditor-backend
