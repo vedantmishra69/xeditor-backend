@@ -1,3 +1,4 @@
+const logger = require("../lib/logger");
 const { makeRequest } = require("../lib/util");
 
 const JUDGE0_API = process.env.JUDGE0_API;
@@ -9,9 +10,10 @@ exports.getLangs = async () => {
   const options = {
     method: "GET",
     headers: {
-      "X-AUTH-TOKEN": JUDGE0_API_KEY,
+      "X-Auth-Token": JUDGE0_API_KEY,
     },
   };
+  logger.info("getLangs()");
   return await makeRequest(url, options);
 };
 
@@ -20,11 +22,12 @@ exports.createSubmission = async (body) => {
   const options = {
     method: "POST",
     headers: {
-      "X-AUTH-TOKEN": JUDGE0_API_KEY,
+      "X-Auth-Token": JUDGE0_API_KEY,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
   };
+  logger.info("createSubmission()", { id: body.user_id, name: body.user_name });
   return await makeRequest(url, options);
 };
 
@@ -33,8 +36,9 @@ exports.getSubmission = async (token) => {
   const options = {
     method: "GET",
     headers: {
-      "X-AUTH-TOKEN": JUDGE0_API_KEY,
+      "X-Auth-Token": JUDGE0_API_KEY,
     },
   };
+  logger.info("getSubmission()", { token: token });
   return await makeRequest(url, options);
 };
