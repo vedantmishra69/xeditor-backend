@@ -7,8 +7,16 @@ const http = require("http");
 const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
+
+const backendIp = process.env.BACKEND_IP;
+
+const options = {
+  cert: fs.readFileSync(`/etc/letsencrypt/live/${backendIp}/fullchain.pem`),
+  key: fs.readFileSync(`/etc/letsencrypt/live/${backendIp}/privkey.pem`),
+};
+
 const expressApp = express();
-const server = http.createServer(expressApp);
+const server = https.createServer(options, expressApp);
 require("dotenv").config();
 
 const { app } = expressWs(expressApp, server);
