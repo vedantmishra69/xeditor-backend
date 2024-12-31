@@ -10,22 +10,22 @@ const rateLimit = require("express-rate-limit");
 const expressApp = express();
 const server = http.createServer(expressApp);
 require("dotenv").config();
-
 const { app } = expressWs(expressApp, server);
 
 const indexRouter = require("./routes/index.route");
 
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000,
-  max: 20,
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 250, // requests per windowMs
+  skipOptions: true,
 });
 
+app.use(cors({ origin: process.env.SITE_URL }));
+app.use(helmet());
 app.use(limiter);
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(compression());
-app.use(helmet());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
