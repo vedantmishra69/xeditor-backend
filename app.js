@@ -20,6 +20,8 @@ const limiter = rateLimit({
   skipOptions: true,
 });
 
+app.set("trust proxy", true);
+
 app.use(cors({ origin: process.env.SITE_URL }));
 app.use(helmet());
 app.use(limiter);
